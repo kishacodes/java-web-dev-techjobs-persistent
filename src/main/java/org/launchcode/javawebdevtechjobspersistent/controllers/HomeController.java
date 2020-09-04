@@ -22,10 +22,10 @@ import java.util.Optional;
 @Controller
 public class HomeController {
     @Autowired
-private EmployerRepository employerRepository;
+    private EmployerRepository employerRepository;
 
     @Autowired
-private SkillRepository skillRepository;
+    private SkillRepository skillRepository;
 
     @Autowired
     private JobRepository jobRepository;
@@ -36,6 +36,7 @@ private SkillRepository skillRepository;
     public String index(Model model) {
 
         model.addAttribute("title", "My Jobs");
+        model.addAttribute("jobs", jobRepository.findAll());
 
         return "index";
     }
@@ -64,7 +65,7 @@ private SkillRepository skillRepository;
         List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
         newJob.setSkills(skillObjs);
 
-//        jobRepository.save(newJob);
+        jobRepository.save(newJob);
 
 
         return "redirect:";
